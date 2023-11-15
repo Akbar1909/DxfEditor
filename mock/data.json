@@ -1,0 +1,526 @@
+{
+    "layers": {
+        "0": {
+            "entities": {},
+            "selected": true,
+            "options": {
+                "name": "0",
+                "displayName": "0"
+            },
+            "visible": true,
+            "deleted": false,
+            "expanded": false,
+            "standNameEntities": {}
+        },
+        "stand shape": {
+            "entities": {
+                "3": {
+                    "type": "POLYLINE",
+                    "vertices": [
+                        {
+                            "x": 52.75,
+                            "y": 159
+                        },
+                        {
+                            "x": 88.75,
+                            "y": 159
+                        },
+                        {
+                            "x": 88.75,
+                            "y": 147
+                        },
+                        {
+                            "x": 52.75,
+                            "y": 147
+                        }
+                    ],
+                    "handle": "3",
+                    "layer": "stand shape",
+                    "colorNumber": 7,
+                    "closed": true,
+                    "children": [
+                        {
+                            "type": "TEXT",
+                            "string": "E145",
+                            "handle": "9",
+                            "layer": "stand id",
+                            "x": 68.779,
+                            "y": 154.5,
+                            "z": 0,
+                            "textHeight": 0.5,
+                            "relScaleX": 0.8,
+                            "hAlign": 1,
+                            "x2": 41.753,
+                            "y2": 68.435,
+                            "z2": 0,
+                            "vAlign": 3,
+                            "scaleX": 1,
+                            "scaleY": 1,
+                            "stand": "3"
+                        }
+                    ],
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "points": [
+                        [52.75, 159],
+                        [88.75, 159],
+                        [88.75, 147],
+                        [52.75, 147]
+                    ]
+                },
+                "11": {
+                    "type": "POLYLINE",
+                    "vertices": [
+                        {
+                            "x": 100.75,
+                            "y": 159
+                        },
+                        {
+                            "x": 52.75,
+                            "y": 159
+                        },
+                        {
+                            "x": 52.75,
+                            "y": 171
+                        },
+                        {
+                            "x": 100.75,
+                            "y": 171
+                        }
+                    ],
+                    "handle": "11",
+                    "layer": "stand shape",
+                    "colorNumber": 7,
+                    "closed": true,
+                    "children": [
+                        {
+                            "type": "TEXT",
+                            "string": "F142",
+                            "handle": "17",
+                            "layer": "stand id",
+                            "x": 74.807,
+                            "y": 166.5,
+                            "z": 0,
+                            "textHeight": 0.5,
+                            "relScaleX": 0.8,
+                            "hAlign": 1,
+                            "x2": 43.753,
+                            "y2": 64.435,
+                            "z2": 0,
+                            "vAlign": 3,
+                            "scaleX": 1,
+                            "scaleY": 1,
+                            "stand": "11"
+                        }
+                    ],
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "points": [
+                        [100.75, 159],
+                        [52.75, 159],
+                        [52.75, 171],
+                        [100.75, 171]
+                    ]
+                },
+                "404": {
+                    "type": "POLYLINE",
+                    "vertices": [
+                        {
+                            "x": 183.25,
+                            "y": 6
+                        },
+                        {
+                            "x": 177.25,
+                            "y": 6
+                        },
+                        {
+                            "x": 177.25,
+                            "y": 0
+                        },
+                        {
+                            "x": 183.25,
+                            "y": 0
+                        }
+                    ],
+                    "handle": "404",
+                    "layer": "stand shape",
+                    "colorNumber": 7,
+                    "closed": true,
+                    "children": [
+                        {
+                            "type": "TEXT",
+                            "string": "A108",
+                            "handle": "40A",
+                            "layer": "stand id",
+                            "x": 178.193,
+                            "y": 4.5,
+                            "z": 0,
+                            "textHeight": 0.5,
+                            "relScaleX": 0.8,
+                            "hAlign": 1,
+                            "x2": 78.253,
+                            "y2": 118.435,
+                            "z2": 0,
+                            "vAlign": 3,
+                            "scaleX": 1,
+                            "scaleY": 1,
+                            "stand": "404"
+                        }
+                    ],
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "points": [
+                        [183.25, 6],
+                        [177.25, 6],
+                        [177.25, 0],
+                        [183.25, 0]
+                    ]
+                }
+            },
+            "selected": true,
+            "options": {
+                "name": "stand shape",
+                "displayName": "stand shape"
+            },
+            "deleted": false,
+            "expanded": false,
+            "visible": true,
+            "standNameEntities": {}
+        },
+        "stand id": {
+            "entities": {},
+            "selected": true,
+            "options": {
+                "name": "stand id",
+                "displayName": "stand id"
+            },
+            "visible": true,
+            "deleted": false,
+            "expanded": false,
+            "standNameEntities": {}
+        }
+    },
+    "wrapper": {
+        "withoutScale": {
+            "leftBottom": {
+                "x": 18.253,
+                "y": 6.434999999999999,
+                "z": 0
+            },
+            "topRight": {
+                "x": 187.753,
+                "y": 119.435,
+                "z": 0
+            }
+        },
+        "withScale": {
+            "leftBottom": {
+                "x": 59.5,
+                "y": 0
+            },
+            "topRight": {
+                "x": 659.5,
+                "y": 400
+            }
+        }
+    },
+    "allEntities": {
+        "3": {
+            "type": "POLYLINE",
+            "vertices": [
+                {
+                    "x": 52.75,
+                    "y": 159
+                },
+                {
+                    "x": 88.75,
+                    "y": 159
+                },
+                {
+                    "x": 88.75,
+                    "y": 147
+                },
+                {
+                    "x": 52.75,
+                    "y": 147
+                }
+            ],
+            "handle": "3",
+            "layer": "stand shape",
+            "colorNumber": 7,
+            "closed": true,
+            "children": [
+                {
+                    "type": "TEXT",
+                    "string": "E145",
+                    "handle": "9",
+                    "layer": "stand id",
+                    "x": 68.779,
+                    "y": 154.5,
+                    "z": 0,
+                    "textHeight": 0.5,
+                    "relScaleX": 0.8,
+                    "hAlign": 1,
+                    "x2": 41.753,
+                    "y2": 68.435,
+                    "z2": 0,
+                    "vAlign": 3,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "stand": "3"
+                }
+            ],
+            "scaleX": 1,
+            "scaleY": 1,
+            "points": [
+                [52.75, 159],
+                [88.75, 159],
+                [88.75, 147],
+                [52.75, 147]
+            ]
+        },
+        "11": {
+            "type": "POLYLINE",
+            "vertices": [
+                {
+                    "x": 100.75,
+                    "y": 159
+                },
+                {
+                    "x": 52.75,
+                    "y": 159
+                },
+                {
+                    "x": 52.75,
+                    "y": 171
+                },
+                {
+                    "x": 100.75,
+                    "y": 171
+                }
+            ],
+            "handle": "11",
+            "layer": "stand shape",
+            "colorNumber": 7,
+            "closed": true,
+            "children": [
+                {
+                    "type": "TEXT",
+                    "string": "F142",
+                    "handle": "17",
+                    "layer": "stand id",
+                    "x": 74.807,
+                    "y": 166.5,
+                    "z": 0,
+                    "textHeight": 0.5,
+                    "relScaleX": 0.8,
+                    "hAlign": 1,
+                    "x2": 43.753,
+                    "y2": 64.435,
+                    "z2": 0,
+                    "vAlign": 3,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "stand": "11"
+                }
+            ],
+            "scaleX": 1,
+            "scaleY": 1,
+            "points": [
+                [100.75, 159],
+                [52.75, 159],
+                [52.75, 171],
+                [100.75, 171]
+            ]
+        },
+        "404": {
+            "type": "POLYLINE",
+            "vertices": [
+                {
+                    "x": 183.25,
+                    "y": 6
+                },
+                {
+                    "x": 177.25,
+                    "y": 6
+                },
+                {
+                    "x": 177.25,
+                    "y": 0
+                },
+                {
+                    "x": 183.25,
+                    "y": 0
+                }
+            ],
+            "handle": "404",
+            "layer": "stand shape",
+            "colorNumber": 7,
+            "closed": true,
+            "children": [
+                {
+                    "type": "TEXT",
+                    "string": "A108",
+                    "handle": "40A",
+                    "layer": "stand id",
+                    "x": 178.193,
+                    "y": 4.5,
+                    "z": 0,
+                    "textHeight": 0.5,
+                    "relScaleX": 0.8,
+                    "hAlign": 1,
+                    "x2": 78.253,
+                    "y2": 118.435,
+                    "z2": 0,
+                    "vAlign": 3,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "stand": "404"
+                }
+            ],
+            "scaleX": 1,
+            "scaleY": 1,
+            "points": [
+                [183.25, 6],
+                [177.25, 6],
+                [177.25, 0],
+                [183.25, 0]
+            ]
+        }
+    },
+    "invalidEntities": {},
+    "tables": {
+        "styles": {
+            "SIMPLEX_FNT": {
+                "type": "STYLE",
+                "name": "SIMPLEX_FNT",
+                "fixedTextHeight": 44,
+                "widthFactor": 1,
+                "obliqueAngle": 0,
+                "flags": 0,
+                "lastHeightUsed": 0.2,
+                "primaryFontFileName": "",
+                "bigFontFileName": ""
+            },
+            "Annotative": {
+                "type": "STYLE",
+                "name": "Annotative",
+                "fixedTextHeight": 0,
+                "widthFactor": 1,
+                "obliqueAngle": 0,
+                "flags": 0,
+                "lastHeightUsed": 0.2,
+                "primaryFontFileName": "txt",
+                "bigFontFileName": ""
+            }
+        },
+        "vports": {
+            "*Active": {
+                "type": "VPORT",
+                "center": {
+                    "x": 90.25915628114517,
+                    "y": 57.5008256421457
+                },
+                "lowerLeft": {
+                    "x": 0,
+                    "y": 0
+                },
+                "upperRight": {
+                    "x": 1,
+                    "y": 1
+                },
+                "snap": {},
+                "snapSpacing": {
+                    "x": 1,
+                    "y": 1
+                },
+                "gridSpacing": {
+                    "x": 0,
+                    "y": 0
+                },
+                "direction": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 1
+                },
+                "target": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "handle": "F42B8",
+                "name": "*Active",
+                "flags": 0,
+                "snapAngle": 0,
+                "angle": 0,
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "xAxisX": 0,
+                "xAxisY": 1,
+                "xAxisZ": 0,
+                "elevation": 0
+            }
+        },
+        "ltypes": {
+            "ByBlock": {
+                "type": "LTYPE",
+                "pattern": [],
+                "name": "ByBlock",
+                "flag": 0,
+                "description": "",
+                "alignment": 65,
+                "elementCount": 0,
+                "patternLength": 0
+            },
+            "ByLayer": {
+                "type": "LTYPE",
+                "pattern": [],
+                "name": "ByLayer",
+                "flag": 0,
+                "description": "",
+                "alignment": 65,
+                "elementCount": 0,
+                "patternLength": 0
+            },
+            "CONTINUOUS": {
+                "type": "LTYPE",
+                "pattern": [],
+                "name": "CONTINUOUS",
+                "flag": 0,
+                "description": "Ausgezogene Linie",
+                "alignment": 65,
+                "elementCount": 0,
+                "patternLength": 0
+            },
+            "VERDECKT": {
+                "type": "LTYPE",
+                "pattern": [
+                    {
+                        "length": 0.2,
+                        "shape": 0
+                    },
+                    {
+                        "length": -0.1,
+                        "shape": 0
+                    }
+                ],
+                "name": "VERDECKT",
+                "flag": 0,
+                "description": "- -",
+                "alignment": 65,
+                "elementCount": 2,
+                "patternLength": 0.3
+            }
+        }
+    },
+    "textEntities": {},
+    "status": "success",
+    "stageOptions": {
+        "x": 59.205014749262546,
+        "y": 0,
+        "scale": 1.1799410029498525,
+        "width": 719,
+        "height": 400
+    }
+}

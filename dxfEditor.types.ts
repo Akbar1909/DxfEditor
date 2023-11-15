@@ -1,0 +1,569 @@
+import { Point2D, Point3D } from 'dxf/Common';
+
+export type ParsedDxfFileHeader = {
+    dimArrowSize: number;
+    extMax: Point3D;
+    extMin: Point2D;
+    insUnits: number;
+    measurement: number;
+};
+
+export type ParsedDxfFileBlocks = Point3D & {
+    entities: EntityModel[];
+    paperSpace: number;
+    xref: string;
+};
+
+export type ParsedDxfFileTables = {
+    layers: Record<
+        string,
+        {
+            type: 'LAYER';
+            colorNumber: number;
+            lineTypeName: string;
+            flags: number;
+            lineWeightEnum: string;
+            name: string;
+        }
+    >;
+    styles: Record<
+        string,
+        {
+            bigFontFileName: string;
+            fixedTextHeight: number;
+            flags: number;
+            lastHeightUsed: number;
+            name: string;
+            obliqueAngle: number;
+            primaryFontFileName: string;
+            type: 'STYLE';
+            widthFactor: number;
+        }
+    >;
+    vports: Record<
+        string,
+        Point3D & {
+            angle: number;
+            center: Point2D;
+            direction: Point3D;
+            elevation: number;
+            flags: number;
+            gridSpacing: Point2D;
+            handle: string;
+            lowerLeft: Point2D;
+            name: string;
+            snap: any;
+            snapAngle: number;
+            snapSpacing: Point2D;
+            target: Point3D;
+            type: 'VPORT';
+            upperRight: Point2D;
+            xAxisX: number;
+            xAxisY: number;
+            xAxisZ: number;
+        }
+    >;
+    ltypes: Record<
+        string,
+        {
+            alignment: number;
+            description: string;
+            elementCount: number;
+            flag: number;
+            name: string;
+            pattern: Array<any>;
+            patternLength: number;
+            type: 'LTYPE';
+        }
+    >;
+};
+
+export type ParsedDxfFileData = {
+    header: ParsedDxfFileHeader;
+    blocks: ParsedDxfFileBlocks;
+    tables: ParsedDxfFileTables;
+    entities: EntityModel[];
+};
+
+enum EntityTypeEnum {
+    LINE = 'LINE',
+    POLYLINE = 'POLYLINE',
+    LWPOLYLINE = 'LWPOLYLINE',
+    MTEXT = 'MTEXT',
+    TEXT = 'TEXT',
+    ARC = 'ARC',
+    CIRCLE = 'CIRCLE',
+    HATCH = 'HATCH',
+    ELLIPSE = 'ELLIPSE',
+    SOLID = 'SOLID',
+    INSERT = 'INSERT',
+}
+
+type RequiredProperties = {
+    scaled?: boolean;
+    selected?: boolean;
+
+    scaleX: number;
+    scaleY: number;
+
+    strokeColor?: string;
+    fillColor?: string;
+    strokeWidth?: number;
+    name: string;
+
+    colorNumber: number;
+
+    deleted: boolean;
+    isSupportedEntity: boolean;
+    hasError: boolean;
+    highLighted: boolean;
+
+    entityStyle?: any;
+    lineStyle?: any;
+
+    rotation: number;
+
+    tempFillColor?: string;
+    tempStrokeColor?: string;
+    tempStrokeWidth?: number;
+};
+
+interface ITextEntity extends RequiredProperties {
+    /**
+     * @description unique property does not affect the appearance
+     */
+    handle: string;
+    /**
+     * @description the layer name which the text is located
+     */
+    layer: string;
+    /**
+     * @description the entity content, it is rendered
+     */
+    string: string;
+    /**
+     * @description font-family
+     */
+    styleName: string;
+    /**
+     * @description fontSize of the text. but its dimension can be (inch, mm, etc..)
+     */
+    textHeight: number;
+    /**
+     * @description TEXT is single line. MTEXT is multi line ('TEXT' | 'MTEXT)
+     */
+    type: EntityTypeEnum.MTEXT | EntityTypeEnum.TEXT;
+    /**
+     * @description can be top, middle or bottom
+     * 1-bottom
+     * 2-middle
+     * 3-top
+     */
+    vAlign: number;
+    /**
+     * @description can be left, center, or right
+     * 0-left
+     * 2-right
+     * 4-center
+     */
+    hAlign: number;
+    /**
+     * @description x coordinate of the start point
+     */
+    x: number;
+    /**
+     * @description x coordinate of the end point
+     */
+    x2?: number;
+    /**
+     * @description y coordinate of the start point
+     */
+    y: number;
+    /**
+     * @description y coordinate of the end point
+     */
+    y2?: number;
+    /**
+     * @description z coordinate of the start point
+     */
+    z: number;
+    /**
+     * @description z coordinate of the end point
+     */
+    z2: number;
+    /**
+     * @description text width, it can be calculated (x2-x1)
+     */
+    width?: number;
+    /**
+     * @description the code is in the range (0-255),
+     * you can find the proper color for the code in the config file
+     */
+
+    xAxisX: number;
+    xAxisY: number;
+    xAxisZ: number;
+    /**
+     * @description if isInStand is true,
+     * it will be rendered inside th stand. TextShape component is not used for that
+     */
+    isInStand: boolean;
+    nominalTextHeight?: number;
+    horizontalWidth?: number;
+    /**
+     * @description fontSize is generated by calculation according to the stand width and height
+     * it does not come from dxf file
+     */
+    fontSize: number;
+    rotation: number;
+    stand: string;
+}
+
+interface ICircleEntity extends RequiredProperties {
+    /**
+     * @description unique property does not affect the appearance
+     */
+    handle: string;
+    /**
+     * @description the layer name which the text is located
+     */
+    layer: string;
+    lineTypeName: string;
+    /**
+     * @description the length of circle radius
+     */
+    r: number;
+    /**
+     * @description entity type 'CIRCLE'
+     */
+    type: EntityTypeEnum.CIRCLE;
+    x: number;
+    y: number;
+    z: number;
+}
+
+interface IArcEntity extends RequiredProperties {
+    /**
+     * @description end angle, the dimension is radian
+     */
+    endAngle: number;
+    /**
+     * @description unique property does not affect the appearance
+     */
+    handle: string;
+    /**
+     * @description the layer name which the text is located
+     */
+    layer: string;
+    lineTypeName: string;
+    /**
+     * @description the length of circle radius
+     */
+    r: number;
+    /**
+     * @description start angle, the dimension is radian
+     */
+    startAngle: number;
+    /**
+     * @description entity type 'ARC'
+     */
+    type: EntityTypeEnum.ARC;
+    x: number;
+    y: number;
+    z: number;
+}
+
+interface ILineEntity extends RequiredProperties {
+    /**
+     * @description end point coordinates
+     */
+    end: {
+        x: number;
+        y: number;
+        z: number;
+    };
+    /**
+     * @description unique property does not affect the appearance
+     */
+    handle: string;
+    /**
+     * @description the layer name which the text is located
+     */
+    layer: string;
+    lineTypeName: string;
+    /**
+     * @description start point coordinates
+     */
+    start: {
+        x: number;
+        y: number;
+        z: number;
+    };
+    /**
+     * @description entity type 'LINE'
+     */
+    type: EntityTypeEnum.LINE;
+    /**
+     * @description the code is in the range (0-255),
+     * you can find the proper color for the code in the config file
+     */
+    points: number[];
+    closed: boolean;
+}
+
+interface IPolylineEntity extends RequiredProperties {
+    /**
+     * @description unique property does not affect the appearance
+     */
+    handle: string;
+    /**
+     * @description the layer name which the text is located
+     */
+    layer: string;
+    lineTypeName: string;
+    /**
+     * @description entity type 'POLYLINE', 'LWPOLYLINE'
+     */
+    type: EntityTypeEnum.POLYLINE | EntityTypeEnum.LWPOLYLINE;
+    /**
+     * @description the coordinates of shape points
+     */
+    vertices: Array<{ x: number; y: number; z: number }>;
+    // [number,number] = [x,y]
+    points: Array<[number, number]>;
+    closed: boolean;
+    x?: number;
+    y?: number;
+    text: ITextEntity;
+    shape?: boolean;
+}
+
+interface IHatchEntity extends RequiredProperties {
+    type: EntityTypeEnum.HATCH;
+
+    boundary: {
+        count: number;
+        loops: Array<{
+            count: number;
+            edgeType: number;
+            entities: EntityModel[];
+            references: string[];
+            sourceObjects: number;
+            type: number;
+        }>;
+    };
+    color: {
+        count: number;
+        gradient: string;
+        rotation: string;
+        tint: string;
+    };
+    elevation: Point2D;
+    extrusionDir: Point2D;
+    seeds: {
+        count: number;
+        seeds: Point2D[];
+    };
+    handle: string;
+    layer: string;
+    patternName: string;
+    fillType: string;
+    style: number;
+    hatchType: number;
+    solidOrGradient: string;
+    scaleX: number;
+    scaleY: number;
+    selected: boolean;
+
+    strokeColor?: string;
+    fillColor?: string;
+    name: string;
+}
+
+interface IEllipseEntity extends RequiredProperties {
+    axisRation: number;
+    endAngle: number;
+    extrusionX: number;
+    extrusionY: number;
+    extrusionZ: number;
+    handle: string;
+    layer: string;
+    majorX: number;
+    majorY: number;
+    majorZ: number;
+    startAngle: number;
+    type: EntityTypeEnum.ELLIPSE;
+    x: number;
+    y: number;
+    z: number;
+    scaleX: number;
+    scaleY: number;
+    selected: boolean;
+
+    strokeColor?: string;
+    fillColor?: string;
+    name: string;
+}
+
+interface IInsertEntity extends RequiredProperties {
+    block: string;
+    handle: string;
+    layer: string;
+    type: EntityTypeEnum.INSERT;
+    x: number;
+    y: number;
+    z: number;
+    blockData: DxfBlockType;
+}
+
+interface ISolidEntity extends RequiredProperties {
+    corners: Point3D[];
+    handle: string;
+    layer: string;
+    type: EntityTypeEnum.SOLID;
+}
+
+type DxfBlockType = {
+    entities: EntityModel[];
+    name: string;
+    x: number;
+    y: number;
+    z: number;
+    xref?: string;
+};
+
+type StandType = IPolylineEntity;
+
+type EntityModel =
+    | ITextEntity
+    | ICircleEntity
+    | IArcEntity
+    | ILineEntity
+    | IPolylineEntity
+    | IHatchEntity
+    | IEllipseEntity
+    | ISolidEntity
+    | IInsertEntity;
+
+type LayerModelType = {
+    entities: Record<string, EntityModel>;
+    standNameEntities: Record<string, ITextEntity>;
+    options: Record<string, any>;
+    selected: boolean;
+    visible: boolean;
+    deleted: boolean;
+    colorNumber: number;
+    flags: number;
+    lineTypeName: string;
+    lineWeightEnum: string;
+    name: string;
+    type: 'LAYER';
+    expanded: boolean;
+};
+
+type LTypeModel = {
+    alignment: number;
+    description: string;
+    elementCount: number;
+    flag: number;
+    name: string;
+    pattern: any;
+    patternLength: number;
+    type: 'LTYPE';
+};
+
+type StyleType = {
+    bigFontFileName: string;
+    fixedTextHeight: number;
+    flags: number;
+    lastHeightUsed: number;
+    name: string;
+    obliqueAngle: number;
+    primaryFontFileName: string;
+    type: 'STYLE';
+    widthFactor: number;
+};
+
+type ActionStatus = 'idle' | 'error' | 'success' | 'loading';
+
+export type AvailableEntities = 'rectangle';
+
+type DxfEditorStateType = {
+    layers: Record<string, LayerModelType>;
+    /**
+     * @description
+     * the status property indicates the state of the uploading process
+     */
+    status: ActionStatus;
+    image: HTMLImageElement | null;
+    stageOptions: {
+        scale: number;
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+    };
+    wrapper: {
+        withScale: {
+            leftBottom: {
+                x: number;
+                y: number;
+            };
+            topRight: {
+                x: number;
+                y: number;
+            };
+        };
+        withoutScale: {
+            leftBottom: {
+                x: number;
+                y: number;
+            };
+            topRight: {
+                x: number;
+                y: number;
+            };
+        };
+    };
+    /**
+     * @description
+     *  allEntities hold only valid entities (POLYLINE)
+     */
+    allEntities: Record<string, IPolylineEntity>;
+    /**
+     * @description
+     * the saveStatus indicates the state of save action
+     */
+    saveStatus: ActionStatus;
+    showPlaceholderImage: boolean;
+    invalidEntities: EntityModel[];
+    scaleStatus: ActionStatus;
+    tables: {
+        ltypes?: Record<string, LTypeModel>;
+        styles?: Record<string, StyleType>;
+        vports?: Record<string, any>;
+    };
+    textEntities: Record<string, ITextEntity>;
+    activeEntityHandle: string;
+};
+
+export type {
+    ITextEntity,
+    EntityModel,
+    IPolylineEntity,
+    ICircleEntity,
+    IArcEntity,
+    ILineEntity,
+    IHatchEntity,
+    IEllipseEntity,
+    ISolidEntity,
+    StandType,
+    IInsertEntity,
+    DxfBlockType,
+    LayerModelType,
+    LTypeModel,
+    StyleType,
+    DxfEditorStateType,
+};
+
+export { EntityTypeEnum };
